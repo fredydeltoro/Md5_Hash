@@ -1,0 +1,11 @@
+{
+  "name": "7d00967bcae2bf4562d63907314305e9",
+  "version": "1.0.0",
+  "description": "Modulo de prueba para Intelisis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "José Alfredo Monroy Sánchez",
+  "license": "ISC"
+}
