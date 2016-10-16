@@ -1,61 +1,48 @@
 module.exports = function (map, scope) {
   // Primer filtro, elemina espacios en blanco
   map = map.replace(/( )/g, '')
-  // Se crea un arreglo de map para poder trabjarlo
-  var map_arr = map.split('')
   // Segundo filtro, se revisa que después del
   // último elemento de un objeto no haya comas,
   // ya que JSON.parse no lo procesa
-  map_arr.forEach(function (val, index, array) {
-    if (val == ',' && array[index+1] == '}') {
+  map = map.replace(/,(?=})/g, '')
+  // Se guarda map ya que quedo mas limpio
+  // para sus posterior uso
+  var new_map = map
+  // Se retiran los elementos que componen un
+  // objecto para solo dejar las llaves y valores de este
+  map = map.replace(/[{},:]/g, ' ')
+  // Se eliminan los espacios vacios de los extremos
+  map = map.trim()
+  // Se genera un arreglo de valores y llaves
+  // y se eliminan espacios de el
+  var values =  map.split(' ')
+  values.forEach((val, index, array) => {
+    if (val == '')
       array.splice(index, 1)
-    }
-  })
-  // Se aplica un mapeo al arreglo de map, que retorne
-  // los elementos que componen un objeto como undefined,
-  // y así poder trabjarlo mas fácil
-  var map_arr_flags = map_arr.map(function (e) {
-    if (e != '{' && e != '}' && e != ' ' && e != ':' && e != ',') {
-      return e
-    }
-  })
-  // Arreglo que almacenará todos las llaves y valores
-  // de map
-  var values =  []
-  // acumulador para reintegrar los valores del arreglo map
-  var value = ''
-
-  // Se genera el arreglo de las llaves y valores de map
-  map_arr_flags.forEach(function (val, index) {
-    // Si el valor es distionto de undefined empieza
-    // a acumularlo en en value
-    if (val != undefined) {
-      value += val
-    } else {
-       // De lo contrario revisa si value no esta
-      // vacio ya que quiere decir q encontro undefined
-      // y no acumulo nada
-      if (value != ''){
-        values.push(value)
-      }
-      // Se vacia value para que pueda acumular nuevamente
-      value = ''
-    }
   })
 
   // Se reintegra map, para poder
   // sustituir sus valores por los valores
   // que JSON.parse puede interpretar
-  map = map_arr.join('')
+  map = new_map
   // Se recorre el arreglo values para comenzar
   // la tarea de remplazo
-  values.forEach(function (val, index, array) {
+  values.forEach((val, index, array) => {
+    // Se crea un arreglo de los valores que tienen
+    // dot notation para poder acceder a sus valores
+    // si estan en scope
     if(val != undefined) keys = val.split('.')
+    // Si la longitud del arreglo es mayor a uno es
+    // decir que se hace referencia a valores anidados
+    // llama a la funcion get_value para obtener esos valores
+    // y son remplazados en map
     if (keys.length > 1 && scope.hasOwnProperty(keys[0])) {
       new_val = get_value(scope, keys)
       map = replace(map, val, new_val)
-    } else if (scope.hasOwnProperty(val)){
-      if (val == array[index+1] && keys[0] == val){
+    } // Si no es valor anidado pero esta en scope
+      // se hace la busqueda del valor y se remplaza en map
+    else if (scope.hasOwnProperty(val)){
+      if (val == array[index+1]){
         map = replace(map, val, scope[val], true)
         map = replace(map, val)
         array[index] = undefined
@@ -70,7 +57,7 @@ module.exports = function (map, scope) {
   // Se obtienen los valores anidados
   // de un objecto
   function get_value(obeject, keys) {
-    keys.forEach(function (key) {
+    keys.forEach(key => {
       obeject = obeject[key]
     })
       return obeject
