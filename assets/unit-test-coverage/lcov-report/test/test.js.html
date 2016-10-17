@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for test/test.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">test/</a> test.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/14</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >var hashmd5 = require('../../../index.js');</span>
+<span class="cstat-no" title="statement not covered" >var assert = require('assert');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >var tests = {</span>
+  uno:{
+    map: `{DatosGenerales: {Nombre: data.nombre,}}`,
+    scope:{data: {nombre: 'Alfredo',}},
+    result: {DatosGenerales: {Nombre: 'Alfredo'}}
+  },
+  dos:{
+    map: '{DatosGenerales: {Nombre: data.nombre, Apodos:data.apodos, escolaridad:data.escolaridad.primaria}, num: num, }',
+    scope:{
+      data: {
+        nombre: 'Alfredo',
+        apodos: ['elfello', 'fredy'],
+        escolaridad:{
+          primaria:'Alfredo v. Bonfil',
+          secundaria: 'Cerro de las campanas',
+          preparatoria: 'CETIS 142'
+        }
+      },
+      num : 5
+    },
+    result: {DatosGenerales: {Nombre: 'Alfredo', Apodos:['elfello', 'fredy'], escolaridad:'Alfredo v. Bonfil'}, num: 5, }
+  },
+  tres:{
+    map: '{DatosGenerales: {Nombre: data.nombre, Apodos:data.apodos, escolaridad:data.escolaridad.primaria}, num: num, }',
+    result: {DatosGenerales: {Nombre: 'Alfredo', Apodos:['elfello', 'fredy'], escolaridad:'Alfredo v. Bonfil'}, num: 5, }
+  },
+  cuatro:{
+    map: '{DatosGenerales: {Nombre: data.nombre, Apodos:data.apodos, escolaridad:data.escolaridad.primaria}, "edad": num, }',
+    result: {DatosGenerales: {Nombre: 'Alfredo', Apodos:['elfello', 'fredy'], escolaridad:'Alfredo v. Bonfil'}, edad: 5, }
+  },
+  cinco:{
+    map: '{DatosGenerales: {Nombre: data.nombre, data:data.apodos, escolaridad:data.escolaridad.primaria}, "edad": num, }',
+    result: {DatosGenerales: {Nombre: 'Alfredo', data:['elfello', 'fredy'], escolaridad:'Alfredo v. Bonfil'}, edad: 5, }
+  }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >describe('Hash Md5', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >  it('Debe regresar undefined', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(undefined, hashmd5(tests.uno.map))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(undefined, hashmd5('asfa', 'asdfas'))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(undefined, hashmd5())</span>
+  })
+<span class="cstat-no" title="statement not covered" >  it('Debe retornar un objeto con los valores del scope', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(JSON.stringify(tests.uno.result), JSON.stringify(hashmd5(tests.uno.map, tests.uno.scope)))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(JSON.stringify(tests.dos.result), JSON.stringify(hashmd5(tests.dos.map, tests.dos.scope)))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(JSON.stringify(tests.tres.result), JSON.stringify(hashmd5(tests.tres.map, tests.dos.scope)))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(JSON.stringify(tests.cuatro.result), JSON.stringify(hashmd5(tests.cuatro.map, tests.dos.scope)))</span>
+<span class="cstat-no" title="statement not covered" >    assert.equal(JSON.stringify(tests.cinco.result), JSON.stringify(hashmd5(tests.cinco.map, tests.dos.scope)))</span>
+  })
+})
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 17 2016 01:46:19 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -1,4 +1,7 @@
 module.exports = function (map, scope) {
+  if (map == undefined || scope == undefined) {
+    return ;
+  }
   // Primer filtro, elemina espacios en blanco
   map = map.replace(/( )/g, '')
   // Segundo filtro, se revisa que después del
@@ -109,7 +112,7 @@ module.exports = function (map, scope) {
       // Si el objeto tiene algun elemento donde la
       // llave y valor se llamen igual {num:num} o {"num":num}
       // se crea una expresión regular especial para este caso
-      regexp = new RegExp(`(${rem}(?!"|:))`)
+      regexp = new RegExp(`(${rem}(?!"|:))`, 'g')
     } else {
       regexp = new RegExp(`(${rem})`)
     }
@@ -120,7 +123,9 @@ module.exports = function (map, scope) {
   }
 
   try {
-    return JSON.parse(map)
+    if (typeof(JSON.parse(map)) == 'object') {
+      return JSON.parse(map)
+    }
   } catch (e) {
     console.log(e, map)
   }
