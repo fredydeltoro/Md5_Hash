@@ -28,6 +28,7 @@ module.exports = function (map, scope) {
   // Se recorre el arreglo values para comenzar
   // la tarea de remplazo
   values.forEach((val, index, array) => {
+    var regex = new RegExp(`(${val}(?="|:))`)
     // Se crea un arreglo de los valores que tienen
     // dot notation para poder acceder a sus valores
     // si estan en scope
@@ -43,12 +44,23 @@ module.exports = function (map, scope) {
       // se hace la busqueda del valor y se remplaza en map
     else if (scope.hasOwnProperty(val)){
       if (val == array[index+1]){
+        // Si llave y valor se llaman igual, primero
+        // se remplazo el valor por el valor del scope
         map = replace(map, val, scope[val], true)
+        // Despues se trabaja con la llave para que
+        // se parsee correctamente
         map = replace(map, val)
+        // y ambos valores se transforman a undefined
+        // para que no vuelvan a ser procesados
         array[index] = undefined
         array[index+1] = undefined
+      } else if (regex.test(map)) {
+          map = replace(map, val)
       } else {
-        map = replace(map, val, scope[val])
+        // Si la llave se llama distinto pero el valor
+        // se encuentra en scope o no reconoce que la llave
+        // y el valor se llaman igual por que vienen entre comillas
+        map = replace(map, val, scope[val], true)
       }
     } else {
       map = replace(map, val)
@@ -65,31 +77,44 @@ module.exports = function (map, scope) {
 
   // Se remplazan las llaves y valores del objecto
   // con los que se encuentran en el el arrglo values
-  // recibe tres parametros de los cuales dos son
-  // requeridos y el tercero es opcional
+  // recibe cuatro parametros de los cuales dos son
+  // requeridos y los ultimos dos son opcionales
   function replace(str, rem, new_val, double) {
     // El valor con en el cual se va a remplazar
     var replace = ''
+    // Se verifica que new_val haya sido embiado
     if (new_val != null) {
+      // Si el valor es numerico se remplaza sin ser procesado
+      // para JSON.parse lo siga respetando como numerico
       if (typeof(new_val) == 'number') {
         replace = new_val
       } else {
         replace = JSON.stringify(new_val)
       }
     } else {
+      // Igual que con new_val se hace la misma validación
+      // solo que con una expresión regular ya que esta rem
+      // viene como string
       if ((/[0-9]/g).test(rem)) {
         replace = rem
       } else if((/"|'/g).test(rem)){
+        // Si ya vienen entre comillas ya no tiene caso
+        // aplicar stringify
         replace = rem
       } else {
         replace = JSON.stringify(rem)
       }
     }
     if (double) {
-      regexp = new RegExp(`(${rem}(?!:))`)
+      // Si el objeto tiene algun elemento donde la
+      // llave y valor se llamen igual {num:num} o {"num":num}
+      // se crea una expresión regular especial para este caso
+      regexp = new RegExp(`(${rem}(?!"|:))`)
     } else {
       regexp = new RegExp(`(${rem})`)
     }
+    // Se remplazan los elementos, según los
+    // parametros evaluados anteriormente
     str = str.replace(regexp, replace)
     return str
   }
